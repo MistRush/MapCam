@@ -107,7 +107,7 @@ const CameraList = ({
                             <span className="camera-name">{cam.name}</span>
                             <span className="camera-details">
                                 {isGrid ? '' : getRegionName(cam.region) + ' • '}
-                                {cam.altitude} m n. m.
+                                {!isGrid && cam.altitude && `${cam.altitude} m n. m.`}
                                 {!isGrid && cam.distance && ` • ${formatDistance(cam.distance)}`}
                             </span>
                         </div>
