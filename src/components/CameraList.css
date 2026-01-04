@@ -6,11 +6,23 @@
 }
 
 .search-input {
-    padding: 10px;
+    padding: 12px;
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.status-message {
+    padding: 10px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.status-message.error {
+    color: #d32f2f;
 }
 
 .camera-list {
@@ -19,33 +31,120 @@
     padding: 0 10px 10px;
 }
 
+/* Base item styles */
 .camera-item {
     background: white;
-    padding: 15px;
+    padding: 12px;
     margin-bottom: 8px;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     transition: background 0.2s;
 }
 
 .camera-item:hover {
-    background: #f0f8ff;
+    background: #f8f9fa;
 }
 
 .camera-item.active {
     background: #e3f2fd;
-    border-left: 5px solid #2196f3;
+    border: 1px solid #2196f3;
 }
 
-.camera-item h3 {
-    margin: 0 0 5px 0;
-    font-size: 16px;
+.camera-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.camera-name {
+    font-weight: 600;
+    font-size: 15px;
     color: #333;
+    margin-bottom: 2px;
 }
 
-.camera-item p {
-    margin: 0;
+.camera-details {
+    font-size: 12px;
+    color: #777;
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+/* --- Grid View Styles (for "Nearest") --- */
+
+.camera-list.grid-view {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Force 2 columns */
+    gap: 10px;
+    align-content: start;
+    /* Prevent items from stretching to fill height */
+}
+
+.camera-item.grid-item {
+    margin-bottom: 0;
+    /* Let grid handle gap */
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    height: fit-content;
+    /* Ensure items don't stretch */
+}
+
+.camera-thumbnail {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* Changed to 16:9 for better presentation */
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Cover to fill the 16:9 area */
+    display: block;
+}
+
+.distance-badge {
+    position: absolute;
+    top: 8px;
+    /* Moved to top */
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item .camera-info {
+    padding: 10px;
+    background: white;
+}
+
+.grid-item .camera-name {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.grid-item .camera-details {
     font-size: 12px;
     color: #666;
 }

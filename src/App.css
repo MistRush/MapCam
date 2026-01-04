@@ -37,20 +37,29 @@ html,
   margin: 0;
 }
 
+.view-toggle {
+  display: flex;
+  align-items: center;
+}
+
 .view-toggle button {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
-  padding: 8px 16px;
-  margin-left: 8px;
+  padding: 6px 10px;
+  /* Compact padding */
+  margin-left: 6px;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .view-toggle button.active {
   background: white;
   color: var(--primary-color);
+  font-weight: bold;
 }
 
 .app-content {
@@ -97,8 +106,15 @@ html,
 
 /* Desktop/Tablet Layout: Side-by-Side */
 @media (min-width: 768px) {
-  .view-toggle {
+
+  /* Hide Map button on desktop, keep others visible */
+  .view-toggle button:first-child {
     display: none;
+  }
+
+  .view-toggle {
+    display: inherit;
+    /* Restore visibility on desktop */
   }
 
   .app-content {
@@ -116,8 +132,8 @@ html,
   .list-pane {
     position: relative;
     flex: 1;
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 320px;
+    max-width: 450px;
     border-right: 1px solid #ddd;
     transform: none !important;
     visibility: visible !important;

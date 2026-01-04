@@ -12,6 +12,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [flyToCamera, setFlyToCamera] = useState(false);
   const [lightboxCamera, setLightboxCamera] = useState(null); // Lifted from CameraMap
+  const [userLocation, setUserLocation] = useState(null);
+  const [isLocating, setIsLocating] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,6 +46,32 @@ function App() {
     setLightboxCamera(null);
   }, []);
 
+  const handleNearest = () => {
+    setViewMode('nearest');
+    setIsLocating(true);
+
+    if (!navigator.geolocation) {
+      alert('Geolokace není ve vašem prohlížeči podporována.');
+      setIsLocating(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        setIsLocating(false);
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+        alert('Nepodařilo se získat vaši polohu. Zkontrolujte oprávnění.');
+        setIsLocating(false);
+      }
+    );
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -60,6 +88,12 @@ function App() {
             onClick={() => setViewMode('list')}
           >
             Seznam
+          </button>
+          <button
+            className={viewMode === 'nearest' ? 'active' : ''}
+            onClick={handleNearest}
+          >
+            Nejbližší
           </button>
         </div>
       </header>
@@ -78,11 +112,15 @@ function App() {
                 onLightboxOpen={handleLightboxOpen}
               />
             </div>
-            <div className={`list-pane ${viewMode === 'list' ? 'visible' : 'hidden'}`}>
+            <div className={`list-pane ${viewMode === 'list' || viewMode === 'nearest' ? 'visible' : 'hidden'}`}>
               <CameraList
                 cameras={cameras}
                 onSelect={handleCameraSelectFromList}
                 selectedCamera={selectedCamera}
+                viewMode={viewMode}
+                userLocation={userLocation}
+                isLocating={isLocating}
+                onLightboxOpen={handleLightboxOpen}
               />
             </div>
           </>
