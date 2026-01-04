@@ -1,0 +1,14 @@
+# Netlify configuration for CamMap
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Edge Functions handle API proxying with proper headers
+# See netlify/edge-functions/ for implementation
+
+# SPA fallback - all routes go to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

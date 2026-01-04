@@ -1,0 +1,187 @@
+/* Lightbox Overlay */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    /* Above Leaflet map (usually 1000) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 95vw;
+    max-height: 95vh;
+    width: 900px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid #333;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+    color: white;
+}
+
+.lightbox-title {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+    padding-right: 30px;
+}
+
+.lightbox-meta {
+    color: #888;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.lightbox-image-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 200px;
+    margin-bottom: 20px;
+}
+
+.lightbox-image-container img {
+    max-width: 100%;
+    max-height: 70vh;
+    /* Leave room for controls and header */
+    object-fit: contain;
+}
+
+.lightbox-loading {
+    color: #666;
+}
+
+/* Controls */
+.lightbox-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #252525;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.control-btn {
+    background: #333;
+    border: 1px solid #444;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.control-btn:hover:not(:disabled) {
+    background: #444;
+    border-color: #555;
+    transform: scale(1.05);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #222;
+}
+
+.timeline-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-slider {
+    width: 100%;
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+    cursor: pointer;
+    accent-color: #646cff;
+    /* Vite purple, matches brand */
+}
+
+.timeline-slider:disabled {
+    cursor: not-allowed;
+    accent-color: #555;
+}
+
+.frame-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #252525;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-family: monospace;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.frame-time {
+    color: #fff;
+}
+
+.frame-count {
+    color: #666;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .lightbox-content {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    .lightbox-image-container img {
+        max-height: 60vh;
+    }
+}

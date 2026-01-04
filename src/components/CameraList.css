@@ -1,0 +1,51 @@
+.camera-list-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f5f5f5;
+}
+
+.search-input {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.camera-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 10px 10px;
+}
+
+.camera-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: background 0.2s;
+}
+
+.camera-item:hover {
+    background: #f0f8ff;
+}
+
+.camera-item.active {
+    background: #e3f2fd;
+    border-left: 5px solid #2196f3;
+}
+
+.camera-item h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.camera-item p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+}
